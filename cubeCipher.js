@@ -53,14 +53,12 @@ const cubeCipher = (plainText) => {
 	let unprocessedAlg = ""
 	for (let i = 0; i < filtered.length; i++) {
 		let index = alphabet.indexOf(filtered[i])
-
 		rotationCode = ((array, count) => {
 			for (let i = 0; i < count + 1; i++) {
 				array.push(array.shift())
 			}
 			return array
 		})(rotationCode, index * ((index % 2) * -2 + 1))
-
 		unprocessedAlg += rotationCode[index]
 	}
 
@@ -82,28 +80,26 @@ const cubeCipher = (plainText) => {
 			let nextSymbol = tokens[1]
 			let nextFace = nextSymbol[0]
 
-			if (face === nextFace) {
-				if (face === symbol && symbol === nextSymbol) {
+			if (face == nextFace) {
+				if (face == symbol && symbol == nextSymbol) {
 					// eg. R R
-					simplified += `${face}2 `
-				} else if (face + "2" === symbol && nextFace === nextSymbol) {
+					simplified += face + "2" + " "
+				} else if (face + "2" == symbol && nextFace == nextSymbol) {
 					// eg. R2 R
-					simplified += `${face}' `
-				} else if (face === symbol && nextFace + "2" === nextSymbol) {
+					simplified += face + "'" + " "
+				} else if (face == symbol && nextFace + "2" == nextSymbol) {
 					// eg. R R2
-					simplified += `${face}' `
+					simplified += face + "'" + " "
 				} else {
-					simplified += `${symbol} + ${nextSymbol}`
+					simplified += symbol + nextSymbol + " "
 				}
 				tokens.splice(0, 2)
 			}
 		}
 
 		tokens.splice(0, 1)
-		simplified += `${symbol} `
+		simplified += symbol + " "
 	}
 
 	return simplified
 }
-
-console.log(cubeCipher("hello"))
